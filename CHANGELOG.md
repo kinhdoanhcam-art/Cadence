@@ -7,4 +7,6 @@
   of the same source.
 - App: overview; a ledger view with totals, approvers and request cards (reading, signatures, schedule, Approve / Mark
   paid / Cancel); a request form showing the request id before signing; a verification page reading `get_limits`.
+- Run through the app on StudioNet (10 transactions, `RUNTIME_EVIDENCE.md`): the same designer and logo read RECURRING
+  (2 approvals, 12 periods) and ONE_OFF (1 approval, one period).
 - Tests: 76 Direct Mode contract tests, 29/29 mutants, frontend tests, calldata table and RPC probe, source hash; CI.

@@ -60,8 +60,15 @@ above 255 bytes.
 
 ## On-chain runs
 
-See `RUNTIME_EVIDENCE.md`: the Intelligent Contract run (13 transactions, every must-verify row PASS) and the Project run
-through this app, one hash per row.
+See `RUNTIME_EVIDENCE.md`: the Project run through this app (10 transactions) and the Intelligent Contract run (13
+transactions, every must-verify row PASS), one hash per row.
+
+Project run through the app: "Pays the designer to keep the logo current." was read **RECURRING** (2 approvals, 12
+periods) and "Pays the designer for the logo." **ONE_OFF** (1 approval, one period although 12 were declared); the
+requester's *Approve* was disabled with the contract's sentence; two approvals produced 12 periods 30 days apart; the
+one-off was paid and completed, period 0 of the recurring request was paid and period 1 was refused as not yet due;
+the ledger read 275,000 committed and unpaid and 65,000 paid. Every result was reported only after the app re-read the
+state: **PASS**.
 
 Intelligent Contract run: R1 → RECURRING (needs 2) and O1 → ONE_OFF (needs 1, one period although 12 were declared); R2
 → RECURRING and O2 → ONE_OFF; two approvals turned R1 into 12 periods with period 0 due that day and period 1 thirty days

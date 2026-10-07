@@ -9,7 +9,38 @@ Both deployments run the same frozen source, SHA-256 `e16d5c3f290ee0deb644e6d301
 
 ## Project run (address `0x95F3EDaaa83bf9BD16ded36528c9C8312329CB94`, through this app)
 
-Deploy tx [`0x64345e21…1d87cca8`](https://explorer-studio.genlayer.com/tx/0x64345e2189d4e8c3f4c5cbfcfa7b5300efc4c566ad45a4c2facad3d71d87cca8). The run through the app is recorded here once it has been made.
+Run date 2026-10-07 (UTC day 20733), app at https://cadence-plum-ten.vercel.app, MetaMask on StudioNet. Deploy tx [`0x64345e21…1d87cca8`](https://explorer-studio.genlayer.com/tx/0x64345e2189d4e8c3f4c5cbfcfa7b5300efc4c566ad45a4c2facad3d71d87cca8). **10 transactions** sent from the app, all FINALIZED with SUCCESS.
+
+Wallets: **A** = owner `0x3065E31B1D993d7C0D59E6786844cBa56780B2d3` · **B** = approver `0x5a52d040581A76e2C032542855D31480f2ea7097` · **C** = requester (also an approver) `0xADE4533b5C00Fc6c8E44F674213c081D919aaD1D`.
+Ledger "Riverside makers club": `02e9a35736f797df36e01f7bf36eda5e1f88f6eddfaacb0d1b802bca31026e3e` — open it at https://cadence-plum-ten.vercel.app/?l=02e9a35736f797df36e01f7bf36eda5e1f88f6eddfaacb0d1b802bca31026e3e.
+
+| # | Wallet | Action in the app | Tx hash | Result (read back by the app from the accepted state) |
+|---|---|---|---|---|
+| P1 | A | Open ledger `Riverside makers club` | [`0xa89f1d3d…8607cade`](https://explorer-studio.genlayer.com/tx/0xa89f1d3df50dd534353ad5a364bc80901865ede13c864432d577612a8607cade) | ledger open, A owner and first approver (the RPC dropped the read-back once; the app then showed "This ledger already exists" and the ledger was opened by id) |
+| P2 | A | Add B, then C as approvers | [`0x136b22c3…676a5035`](https://explorer-studio.genlayer.com/tx/0x136b22c3f4b35ccfe045cb55561d669dd85f74e77deb9de1e32c868c676a5035) ; [`0xf1630747…740a24df`](https://explorer-studio.genlayer.com/tx/0xf1630747387ba5ab50cc40fc646705e6959cb2768acd01e2703ab78c740a24df) | Approvers 3 of 5 |
+| P3 | C | Request 25,000 × 12 — `Pays the designer to keep the logo current.` | [`0xd52a06d1…eb4d40fd`](https://explorer-studio.genlayer.com/tx/0xd52a06d171e99f74dae843a76ab1f400bdd71728106bc1c4e7ad3cd5eb4d40fd) | **RECURRING** — needs 2 approvers, becomes 12 periods 30 days apart |
+| P4 | C | Request 40,000 × 12 — `Pays the designer for the logo.` | [`0x85a5bc91…f0092402`](https://explorer-studio.genlayer.com/tx/0x85a5bc9165895c3beb04cba5397c02c4b9ecb57a9013ff1f2b3e94d0f0092402) | **ONE_OFF** — needs 1 approver, one period although 12 were declared ("1 (asked 12)") |
+| P5 | C | Own requests in the ledger | — (not sent) | *Approve* disabled with *You cannot approve your own request* on both (screenshot 2) |
+| P6 | A | Approve the recurring request | [`0xa04b1a47…67447cf8`](https://explorer-studio.genlayer.com/tx/0xa04b1a478ee9a9ccbf5a6c3fcef669d60392753793cb2dc4fb7d873067447cf8) | 1 of 2 approvals; A then sees *You have already approved this request* |
+| P7 | A | Approve the one-off request | [`0xecf25094…04a9bb89`](https://explorer-studio.genlayer.com/tx/0xecf25094c10b025a464a336cd35691439ae1f3f661795d61c6a860f404a9bb89) | APPROVED with one approval, 1 period due 2026-10-07 |
+| P8 | B | Approve the recurring request | [`0xa495b825…09388452`](https://explorer-studio.genlayer.com/tx/0xa495b825463e598638d2bd4edde9b86c829ec712d7bf03473a4892ee09388452) | **APPROVED, 12 periods**: #0 due 2026-10-07, #1 2026-11-06 … #11 2027-09-02 (screenshot 4) |
+| P9 | A | Mark period 0 of the one-off request paid | [`0xff299806…9c718ea3`](https://explorer-studio.genlayer.com/tx/0xff299806a88a1991e4fffbe949e576d58603ed0f57a6fcb0f128f3119c718ea3) | COMPLETED — its single period paid |
+| P10 | A | Mark period 0 of the recurring request paid | [`0xe31e4389…57c17e7d`](https://explorer-studio.genlayer.com/tx/0xe31e43890577e17f4976eb0641e4ed3b9daaa8328e9d50c8089d425b57c17e7d) | 1 of 12 paid; *Mark paid* then disabled with *This period is not due yet* |
+| P11 | — | The ledger | — (read) | Committed, unpaid **275,000** (11 × 25,000) · Paid **65,000** (40,000 + 25,000) · Pending **0** · Requests 2 (screenshot 1) |
+
+One purpose about the same designer and the same logo was read RECURRING and needed two signatures and a 12-period
+schedule; the other was read ONE_OFF and needed one signature and one period. The app reported every write only after
+re-reading the ledger and the request (`src/lib/verify.ts`).
+
+Screenshots:
+
+![The ledger after the run: 275,000 committed and unpaid, 65,000 paid](docs/evidence/1-ledger-after-run.png)
+
+![The requester's own request: Approve disabled with the contract's sentence](docs/evidence/2-own-request-refused.png)
+
+![Two readings: RECURRING needs two signatures, ONE_OFF one and a single period](docs/evidence/3-two-readings.png)
+
+![Two approvals turn the recurring request into 12 periods 30 days apart](docs/evidence/4-twelve-period-schedule.png)
 
 ## Intelligent Contract run (address `0x6be268aF6f1eE0179b5d8828191Cde9C46Afde0e`, Studio)
 

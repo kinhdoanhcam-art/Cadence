@@ -15,6 +15,7 @@ and a schedule of periods to mark paid. Amounts are whole numbers in the ledger'
 | Contract source | `contracts/Recurs.py` (SHA-256 in `SOURCE_SHA256.txt`) |
 | Project deployment | [`0x95F3EDaaa83bf9BD16ded36528c9C8312329CB94`](https://explorer-studio.genlayer.com/address/0x95F3EDaaa83bf9BD16ded36528c9C8312329CB94) |
 | Intelligent Contract | Recurs — the same frozen source, deployed separately at [`0x6be268aF6f1eE0179b5d8828191Cde9C46Afde0e`](https://explorer-studio.genlayer.com/address/0x6be268aF6f1eE0179b5d8828191Cde9C46Afde0e) |
+| Live app | https://cadence-plum-ten.vercel.app |
 | Evidence | `RUNTIME_EVIDENCE.md` (one tx hash per row) · `TESTING.md` |
 
 ## What it does
@@ -31,7 +32,10 @@ thing:
 
 Period 0 falls due on the approval day and period k 30 × k days later; only the owner marks a period paid, and only once
 it is due. On StudioNet, "Pays the designer to keep the logo current." was read **RECURRING** (two signatures, twelve
-periods) and "Pays the designer for the logo." **ONE_OFF** (one signature, one period although twelve were declared).
+periods) and "Pays the designer for the logo." **ONE_OFF** (one signature, one period although twelve were declared) —
+both on the Intelligent Contract and again through this app.
+
+![The ledger after the run through the app](docs/evidence/1-ledger-after-run.png)
 
 Unclear readings count as ONE_OFF, so nothing becomes a standing commitment on a guess.
 
