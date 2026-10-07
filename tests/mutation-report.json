@@ -1,0 +1,151 @@
+{
+ "total": 29,
+ "caught": 29,
+ "results": [
+  {
+   "name": "recurring needs only one approval",
+   "status": "CAUGHT",
+   "first_failure": "FAILED tests/contract/test_recurs.py::test_tooth_same_designer_two_approvals_and_a_schedule_versus_one_line"
+  },
+  {
+   "name": "one-off keeps the declared periods",
+   "status": "CAUGHT",
+   "first_failure": "FAILED tests/contract/test_recurs.py::test_tooth_same_designer_two_approvals_and_a_schedule_versus_one_line"
+  },
+  {
+   "name": "recurring schedule collapses to one period",
+   "status": "CAUGHT",
+   "first_failure": "FAILED tests/contract/test_recurs.py::test_tooth_same_designer_two_approvals_and_a_schedule_versus_one_line"
+  },
+  {
+   "name": "approval threshold off by one",
+   "status": "CAUGHT",
+   "first_failure": "FAILED tests/contract/test_recurs.py::test_tooth_same_designer_two_approvals_and_a_schedule_versus_one_line"
+  },
+  {
+   "name": "period length ignored (a period every day)",
+   "status": "CAUGHT",
+   "first_failure": "FAILED tests/contract/test_recurs.py::test_periods_fall_due_every_30_days - A..."
+  },
+  {
+   "name": "due check off by one (due day itself refused)",
+   "status": "CAUGHT",
+   "first_failure": "FAILED tests/contract/test_recurs.py::test_periods_fall_due_every_30_days - g..."
+  },
+  {
+   "name": "approval day not recorded",
+   "status": "CAUGHT",
+   "first_failure": "FAILED tests/contract/test_recurs.py::test_tooth_same_designer_two_approvals_and_a_schedule_versus_one_line"
+  },
+  {
+   "name": "fail-safe flipped on unparseable output",
+   "status": "CAUGHT",
+   "first_failure": "FAILED tests/contract/test_recurs.py::test_fail_safe_on_unparseable_output - ..."
+  },
+  {
+   "name": "unknown label maps to RECURRING",
+   "status": "CAUGHT",
+   "first_failure": "FAILED tests/contract/test_recurs.py::test_fail_safe_on_unknown_label - Asser..."
+  },
+  {
+   "name": "validator accepts any valid label",
+   "status": "CAUGHT",
+   "first_failure": "FAILED tests/contract/test_recurs.py::test_validator_rejects_disagreement_and_bad_shapes"
+  },
+  {
+   "name": "anyone may approve",
+   "status": "CAUGHT",
+   "first_failure": "FAILED tests/contract/test_recurs.py::test_third_wallet_is_refused_by_every_restricted_write"
+  },
+  {
+   "name": "requester may approve own request",
+   "status": "CAUGHT",
+   "first_failure": "FAILED tests/contract/test_recurs.py::test_the_requester_never_counts_as_an_approver"
+  },
+  {
+   "name": "the same approver counts twice",
+   "status": "CAUGHT",
+   "first_failure": "FAILED tests/contract/test_recurs.py::test_recurring_stays_pending_while_the_owner_is_the_only_approver"
+  },
+  {
+   "name": "anyone may mark payments",
+   "status": "CAUGHT",
+   "first_failure": "FAILED tests/contract/test_recurs.py::test_third_wallet_is_refused_by_every_restricted_write"
+  },
+  {
+   "name": "a period may be paid twice",
+   "status": "CAUGHT",
+   "first_failure": "FAILED tests/contract/test_recurs.py::test_revert_period_already_paid - Asser..."
+  },
+  {
+   "name": "paying every period does not complete",
+   "status": "CAUGHT",
+   "first_failure": "FAILED tests/contract/test_recurs.py::test_later_periods_may_be_paid_before_earlier_ones_once_due"
+  },
+  {
+   "name": "anyone may cancel",
+   "status": "CAUGHT",
+   "first_failure": "FAILED tests/contract/test_recurs.py::test_owner_may_cancel_a_pending_request_and_an_approver_may_not"
+  },
+  {
+   "name": "cancelled request still counts as committed",
+   "status": "CAUGHT",
+   "first_failure": "FAILED tests/contract/test_recurs.py::test_cancel_stops_the_unpaid_periods - ..."
+  },
+  {
+   "name": "anyone may add approvers",
+   "status": "CAUGHT",
+   "first_failure": "FAILED tests/contract/test_recurs.py::test_third_wallet_is_refused_by_every_restricted_write"
+  },
+  {
+   "name": "approver cap off by one (6 approvers)",
+   "status": "CAUGHT",
+   "first_failure": "FAILED tests/contract/test_recurs.py::test_revert_maximum_approvers - Asserti..."
+  },
+  {
+   "name": "same request may be filed twice",
+   "status": "CAUGHT",
+   "first_failure": "FAILED tests/contract/test_recurs.py::test_whitespace_variants_share_one_request_id"
+  },
+  {
+   "name": "request id ignores whitespace normalization",
+   "status": "CAUGHT",
+   "first_failure": "FAILED tests/contract/test_recurs.py::test_whitespace_variants_share_one_request_id"
+  },
+  {
+   "name": "reserved token not checked on the purpose",
+   "status": "CAUGHT",
+   "first_failure": "FAILED tests/contract/test_recurs.py::test_revert_reserved_token - AssertionE..."
+  },
+  {
+   "name": "purpose length cap off by one",
+   "status": "CAUGHT",
+   "first_failure": "FAILED tests/contract/test_recurs.py::test_revert_purpose_too_long - genlayer..."
+  },
+  {
+   "name": "ledger request cap off by one",
+   "status": "CAUGHT",
+   "first_failure": "FAILED tests/contract/test_recurs.py::test_revert_ledger_full - AssertionErro..."
+  },
+  {
+   "name": "fence strip: no gap and a single pass (cross-token rebuild survives)",
+   "status": "CAUGHT",
+   "first_failure": "FAILED tests/contract/test_recurs.py::test_fence_strip_is_fixed_point - Asser..."
+  },
+  {
+   "name": "wallet leaks into the prompt",
+   "status": "CAUGHT",
+   "first_failure": "FAILED tests/contract/test_recurs.py::test_prompt_never_sees_wallets_amounts_ledger_or_state"
+  },
+  {
+   "name": "approve: caller checked before state",
+   "status": "CAUGHT",
+   "first_failure": "FAILED tests/contract/test_recurs.py::test_check_order_approve_state_before_caller"
+  },
+  {
+   "name": "today ignores the day of month",
+   "status": "CAUGHT",
+   "first_failure": "FAILED tests/contract/test_recurs.py::test_tooth_same_designer_two_approvals_and_a_schedule_versus_one_line"
+  }
+ ]
+}

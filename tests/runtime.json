@@ -1,0 +1,289 @@
+{
+ "contract": "Recurs",
+ "wallets": {
+  "A": "ledger owner (approver 1)",
+  "B": "approver",
+  "C": "requester (also an approver)"
+ },
+ "methods": {
+  "open_ledger": [
+   "name"
+  ],
+  "add_approver": [
+   "ledger_id",
+   "wallet"
+  ],
+  "request": [
+   "ledger_id",
+   "payee",
+   "amount",
+   "periods",
+   "purpose"
+  ],
+  "approve": [
+   "request_id"
+  ],
+  "mark_paid": [
+   "request_id",
+   "k"
+  ],
+  "cancel": [
+   "request_id"
+  ],
+  "get_ledger": [
+   "ledger_id"
+  ],
+  "get_request": [
+   "request_id"
+  ],
+  "get_ledger_requests": [
+   "ledger_id"
+  ]
+ },
+ "rows": [
+  {
+   "n": 1,
+   "calls": [
+    {
+     "wallet": "A",
+     "method": "open_ledger",
+     "args": [
+      "Riverside makers club"
+     ],
+     "save": {
+      "name": "L",
+      "payload": [
+       "L:RECURS:LEDGER:V1|",
+       "sender",
+       "L:|",
+       "len(norm(A0))",
+       "L:|",
+       "norm(A0)"
+      ]
+     }
+    },
+    {
+     "kind": "view",
+     "method": "get_ledger",
+     "args": [
+      "$L"
+     ]
+    }
+   ],
+   "expect": "ledger L open, approvers [A]; get_ledger(L) shows `today` (days since 1970-01-01) and `today_date` = today's UTC date"
+  },
+  {
+   "n": 2,
+   "calls": [
+    {
+     "wallet": "A",
+     "method": "add_approver",
+     "args": [
+      "$L",
+      "$B"
+     ]
+    },
+    {
+     "wallet": "A",
+     "method": "add_approver",
+     "args": [
+      "$L",
+      "$C"
+     ]
+    }
+   ],
+   "expect": "three approvers: A, B, C"
+  },
+  {
+   "n": 3,
+   "wallet": "C",
+   "method": "request",
+   "args": [
+    "$L",
+    "$C",
+    25000,
+    12,
+    "Pays the designer to keep the logo current."
+   ],
+   "save": {
+    "name": "REQ1",
+    "payload": [
+     "L:RECURS:REQUEST:V1|",
+     "A0",
+     "L:|",
+     "sender",
+     "L:|",
+     "len(norm(A4))",
+     "L:|",
+     "norm(A4)"
+    ]
+   },
+   "expect": "RECURRING; needed 2; PENDING"
+  },
+  {
+   "n": 4,
+   "wallet": "C",
+   "method": "request",
+   "args": [
+    "$L",
+    "$C",
+    40000,
+    12,
+    "Pays the designer for the logo."
+   ],
+   "save": {
+    "name": "REQ2",
+    "payload": [
+     "L:RECURS:REQUEST:V1|",
+     "A0",
+     "L:|",
+     "sender",
+     "L:|",
+     "len(norm(A4))",
+     "L:|",
+     "norm(A4)"
+    ]
+   },
+   "expect": "ONE_OFF; needed 1; periods_on_approval 1 although 12 were declared"
+  },
+  {
+   "n": 5,
+   "wallet": "C",
+   "method": "approve",
+   "args": [
+    "$REQ1"
+   ],
+   "revert": "You cannot approve your own request",
+   "expect": "revert *You cannot approve your own request*"
+  },
+  {
+   "n": 6,
+   "wallet": "A",
+   "method": "approve",
+   "args": [
+    "$REQ1"
+   ],
+   "expect": "approvals 1 of 2; REQ1 stays PENDING"
+  },
+  {
+   "n": 7,
+   "wallet": "B",
+   "method": "approve",
+   "args": [
+    "$REQ1"
+   ],
+   "expect": "REQ1 APPROVED, 12 periods; period 0 due today, period 1 due in 30 days"
+  },
+  {
+   "n": 8,
+   "wallet": "A",
+   "method": "approve",
+   "args": [
+    "$REQ2"
+   ],
+   "expect": "REQ2 APPROVED with one approval, 1 period"
+  },
+  {
+   "n": 9,
+   "wallet": "A",
+   "method": "mark_paid",
+   "args": [
+    "$REQ1",
+    1
+   ],
+   "revert": "This period is not due yet",
+   "expect": "revert *This period is not due yet*"
+  },
+  {
+   "n": 10,
+   "wallet": "A",
+   "method": "mark_paid",
+   "args": [
+    "$REQ1",
+    0
+   ],
+   "expect": "REQ1 period 0 paid; paid_count 1"
+  },
+  {
+   "n": 11,
+   "wallet": "C",
+   "method": "request",
+   "args": [
+    "$L",
+    "$C",
+    3000,
+    12,
+    "Covers the server that hosts our site."
+   ],
+   "save": {
+    "name": "REQ3",
+    "payload": [
+     "L:RECURS:REQUEST:V1|",
+     "A0",
+     "L:|",
+     "sender",
+     "L:|",
+     "len(norm(A4))",
+     "L:|",
+     "norm(A4)"
+    ]
+   },
+   "expect": "RECURRING; needed 2"
+  },
+  {
+   "n": 12,
+   "wallet": "C",
+   "method": "request",
+   "args": [
+    "$L",
+    "$C",
+    90000,
+    12,
+    "Covers the server we bought for the site."
+   ],
+   "save": {
+    "name": "REQ4",
+    "payload": [
+     "L:RECURS:REQUEST:V1|",
+     "A0",
+     "L:|",
+     "sender",
+     "L:|",
+     "len(norm(A4))",
+     "L:|",
+     "norm(A4)"
+    ]
+   },
+   "expect": "ONE_OFF; needed 1"
+  },
+  {
+   "n": 13,
+   "kind": "view",
+   "method": "get_ledger",
+   "args": [
+    "$L"
+   ],
+   "expect": "read: committed_unpaid \"315000\" (11×25000 + 40000), paid_total \"25000\", pending_count 2"
+  }
+ ],
+ "caps": [
+  {
+   "label": "a ledger name at the 60-character cap",
+   "method": "open_ledger",
+   "args": [
+    "x*60"
+   ]
+  },
+  {
+   "label": "a purpose at the 100-character cap, the maximum amount and 12 periods",
+   "method": "request",
+   "args": [
+    "$L",
+    "$C",
+    1000000000000,
+    12,
+    "x*100"
+   ]
+  }
+ ]
+}

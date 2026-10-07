@@ -1,0 +1,78 @@
+{
+  "owner": "0x3065E31B1D993d7C0D59E6786844cBa56780B2d3",
+  "requester": "0xADE4533b5C00Fc6c8E44F674213c081D919aaD1D",
+  "ledgers": [
+    {
+      "name": "Riverside makers club",
+      "ledger_id": "02e9a35736f797df36e01f7bf36eda5e1f88f6eddfaacb0d1b802bca31026e3e"
+    },
+    {
+      "name": "  Riverside   makers\tclub ",
+      "ledger_id": "02e9a35736f797df36e01f7bf36eda5e1f88f6eddfaacb0d1b802bca31026e3e"
+    },
+    {
+      "name": "Café　des amis",
+      "ledger_id": "c66fe07211a6cd74afaaf9b2161d534c27b1a45a9ba43344f4d23fb8be01247b"
+    },
+    {
+      "name": "\u001cChess night\u001f",
+      "ledger_id": "dda44593e09b07d76aa6542c1be3fdf0b4077ce57e0d1d314545246d03ba4d1e"
+    },
+    {
+      "name": "﻿Book club",
+      "ledger_id": "872a8339b0927210dff2c3a8c42dc0e52d5c3e56e655eae9fed53469ed1d1145"
+    }
+  ],
+  "requests": [
+    {
+      "purpose": "Pays the designer to keep the logo current.",
+      "request_id": "458ec200dd8a3fddfad732e8a700e05efdc2703bf94090e7068423b838d2f225"
+    },
+    {
+      "purpose": "Pays the designer for the logo.",
+      "request_id": "ca393eaa67d109b31245461f90f5f2135fbc8fd7f542c4f2cf89eb3da96e8312"
+    },
+    {
+      "purpose": "  Covers the serverthat hosts our site. ",
+      "request_id": "1152ffbb36b1757fdb2e7c05cd932fdf4cbfd48d38c6862fde17fd6b4cc33a16"
+    },
+    {
+      "purpose": "Our share of the office internet 🌐",
+      "request_id": "7af045124cde730d1a1c37302c805c55e2e771f5bda5a4598ed09e1f294c9191"
+    }
+  ],
+  "dates": [
+    {
+      "day": 0,
+      "date": "1970-01-01"
+    },
+    {
+      "day": 20732,
+      "date": "2026-10-06"
+    },
+    {
+      "day": 20733,
+      "date": "2026-10-07"
+    },
+    {
+      "day": 20762,
+      "date": "2026-11-05"
+    },
+    {
+      "day": 21062,
+      "date": "2027-09-01"
+    },
+    {
+      "day": 11016,
+      "date": "2000-02-29"
+    },
+    {
+      "day": 20147,
+      "date": "2025-02-28"
+    },
+    {
+      "day": -1,
+      "date": "1969-12-31"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "network": "GenLayer StudioNet",
+  "chain_id": 61999,
+  "contract_file": "contracts/Recurs.py",
+  "source_sha256": "e16d5c3f290ee0deb644e6d301130a4ea757ad7bead058e6a43a0317ca992fa1",
+  "intelligent_contract": "0x6be268aF6f1eE0179b5d8828191Cde9C46Afde0e",
+  "project": "0x95F3EDaaa83bf9BD16ded36528c9C8312329CB94"
+}
